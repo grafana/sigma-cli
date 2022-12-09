@@ -4,6 +4,7 @@ from sigma.backends.insight_idr import InsightIDRBackend
 from sigma.backends.qradar import QradarBackend
 from sigma.backends.elasticsearch import LuceneBackend
 from sigma.backends.opensearch import OpensearchLuceneBackend
+from sigma.backends.loki import LogQLBackend
 
 Backend = namedtuple("Backend", ("cls", "text", "formats", "requires_pipeline"))
 
@@ -33,4 +34,8 @@ backends = {
         "monitor_rule": "OpenSearch monitor rule with embedded Lucene query",
         "dsl_lucene": "OpenSearch query DSL with embedded Lucene queries",
     }, True),
+    "loki": Backend(LogQLBackend, "Grafana Loki", {
+        "default": "Plain Loki LogQL queries",
+        "ruler": "Loki 'ruler' output format for generating alerts",
+    }, False),
 }
